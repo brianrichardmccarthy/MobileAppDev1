@@ -3,4 +3,6 @@
     <string name="button_addHillfort">Add Hillfort</string>
     <string name="hint_hillfortName">Hillfort Name</string>
     <string name="hint_hillfortDesc">Hillfort Description</string>
+    <string name="menu_addHillfort">Add</string>
+    <string name="button_cancel">Cancel</string>
 </resources>
