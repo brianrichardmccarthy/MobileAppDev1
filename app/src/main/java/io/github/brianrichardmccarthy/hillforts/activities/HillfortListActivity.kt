@@ -6,10 +6,13 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import io.github.brianrichardmccarthy.hillforts.R
 import io.github.brianrichardmccarthy.hillforts.main.MainApp
+import io.github.brianrichardmccarthy.hillforts.models.HillfortModel
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 
-class HillfortListActivity: AppCompatActivity() {
+class HillfortListActivity: AppCompatActivity(), HillfortListener {
+
     lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +25,7 @@ class HillfortListActivity: AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = HillfortAdapter(app.hillforts)
+        recyclerView.adapter = HillfortAdapter(app.hillforts.findAll(), this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -35,6 +38,11 @@ class HillfortListActivity: AppCompatActivity() {
             R.id.item_add -> startActivityForResult<HillfortActivity>(0)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onHillfortClick(hillfort: HillfortModel) {
+        startActivityForResult(intentFor<HillfortActivity>().putExtra("hillfort_edit", hillfort), 0)
+     // startActivityForResult(intentFor<PlacemarkActivity>().putExtra("placemark_edit", placemark), AppCompatActivity.RESULT_OK)
     }
 
 }

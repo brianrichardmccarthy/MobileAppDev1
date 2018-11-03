@@ -26,18 +26,30 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         toolbarAdd.title = title
         setSupportActionBar(toolbarAdd)
 
+        var edit = false
+
+        if (intent.hasExtra("hillfort_edit")) {
+            edit = true
+            hillfortModel = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
+            hillfortTitle.setText(hillfortModel.name)
+            hillfortDescription.setText(hillfortModel.description)
+            btnAdd.setText(R.string.save_hillfort)
+        }
+
         btnAdd.setOnClickListener {
             hillfortModel.name = hillfortTitle.text.toString()
             hillfortModel.description = hillfortDescription.text.toString()
-            if (hillfortModel.name.isNotEmpty()) {
-                app.hillforts.add(hillfortModel.copy())
-                app.hillforts.forEach {
-                    info("$it")
+            if (hillfortModel.name.isEmpty()) {
+                toast(R.string.enter_hillfort_title)
+            } else {
+                if (edit) {
+                    info("$hillfortModel")
+                    app.hillforts.update(hillfortModel.copy())
+                } else {
+                    app.hillforts.create(hillfortModel.copy())
                 }
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
-            } else {
-                toast("Please enter a title")
             }
         }
     }
