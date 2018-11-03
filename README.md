@@ -2,6 +2,8 @@
 
 ## Assignment 1 Hillforts
 
+### Requirments
+
 | Grade Band | Components | Hillfort features | ToolBar | Persistance |
 | ---------- | ---------- | ----------------- | ------- | ----------- |
 | Starter | Hillfort List | Name | Cancel | None |
@@ -14,3 +16,5 @@
 |            | Settings (email & password) | visited checkbox | settings |  |
 | Excellent | Settings with stats) | Date Visited | Naviagtion Drawer | Unified Json |
 |  | | Additional notes | | |
+
+### Implemented
