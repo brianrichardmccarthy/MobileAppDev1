@@ -1,10 +1,14 @@
 package io.github.brianrichardmccarthy.hillforts.activities
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import io.github.brianrichardmccarthy.hillforts.R
+import io.github.brianrichardmccarthy.hillforts.helpers.readImage
+import io.github.brianrichardmccarthy.hillforts.helpers.readImageFromPath
+import io.github.brianrichardmccarthy.hillforts.helpers.showImagePicker
 import io.github.brianrichardmccarthy.hillforts.main.MainApp
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import io.github.brianrichardmccarthy.hillforts.models.HillfortModel
@@ -16,6 +20,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     var hillfortModel = HillfortModel()
     lateinit var app : MainApp
+    val IMAGE_REQUEST = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +38,16 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfortModel = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
             hillfortTitle.setText(hillfortModel.name)
             hillfortDescription.setText(hillfortModel.description)
+            hillfortImage.setImageBitmap(readImageFromPath(this, hillfortModel.image))
+            if (hillfortModel.image != null) {
+                chooseImage.setText(R.string.change_hillfort_image)
+            }
             btnAdd.setText(R.string.save_hillfort)
+        }
+
+        chooseImage.setOnClickListener {
+            info ("Select image")
+            showImagePicker(this, IMAGE_REQUEST)
         }
 
         btnAdd.setOnClickListener {
@@ -67,4 +81,18 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         menuInflater.inflate(R.menu.menu_hillfort, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            IMAGE_REQUEST -> {
+                if (data != null) {
+                    hillfortModel.image = data.getData().toString()
+                    hillfortImage.setImageBitmap(readImage(this, resultCode, data))
+                    chooseImage.setText(R.string.change_hillfort_image)
+                }
+            }
+        }
+    }
+
 }

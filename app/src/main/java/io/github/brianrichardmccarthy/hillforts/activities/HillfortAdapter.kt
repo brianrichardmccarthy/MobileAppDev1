@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.github.brianrichardmccarthy.hillforts.R
+import io.github.brianrichardmccarthy.hillforts.helpers.readImageFromPath
 import io.github.brianrichardmccarthy.hillforts.models.HillfortModel
 import kotlinx.android.synthetic.main.card_hillfort.view.*
 
@@ -29,6 +30,7 @@ class HillfortAdapter constructor(private var placemarks: List<HillfortModel>, p
         fun bind(hillfort: HillfortModel, listener: HillfortListener) {
             itemView.hillfortTitle.text = hillfort.name
             itemView.hillfortDescription.text = hillfort.description
+            itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, hillfort.image))
             itemView.setOnClickListener { listener.onHillfortClick(hillfort) }
         }
     }

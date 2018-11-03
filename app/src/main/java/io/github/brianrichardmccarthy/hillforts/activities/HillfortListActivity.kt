@@ -1,5 +1,6 @@
 package io.github.brianrichardmccarthy.hillforts.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -42,7 +43,11 @@ class HillfortListActivity: AppCompatActivity(), HillfortListener {
 
     override fun onHillfortClick(hillfort: HillfortModel) {
         startActivityForResult(intentFor<HillfortActivity>().putExtra("hillfort_edit", hillfort), 0)
-     // startActivityForResult(intentFor<PlacemarkActivity>().putExtra("placemark_edit", placemark), AppCompatActivity.RESULT_OK)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        recyclerView.adapter?.notifyDataSetChanged()
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
 }
