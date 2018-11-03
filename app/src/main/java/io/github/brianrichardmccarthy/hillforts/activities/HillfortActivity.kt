@@ -1,10 +1,10 @@
-package activities
+package io.github.brianrichardmccarthy.hillforts.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import io.github.brianrichardmccarthy.hillforts.R
 import kotlinx.android.synthetic.main.activity_hillfort.*
-import models.HillfortModel
+import io.github.brianrichardmccarthy.hillforts.models.HillfortModel
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
