@@ -2,6 +2,8 @@ package io.github.brianrichardmccarthy.hillforts.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import io.github.brianrichardmccarthy.hillforts.R
 import io.github.brianrichardmccarthy.hillforts.main.MainApp
 import kotlinx.android.synthetic.main.activity_hillfort.*
@@ -21,6 +23,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         info("Hillfort Activity started..")
         app = application as MainApp
 
+        toolbarAdd.title = title
+        setSupportActionBar(toolbarAdd)
+
         btnAdd.setOnClickListener {
             hillfortModel.name = hillfortTitle.text.toString()
             hillfortModel.description = hillfortDescription.text.toString()
@@ -35,11 +40,19 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
                 toast("Please enter a title")
             }
         }
+    }
 
-        btnCancel.setOnClickListener {
-            setResult(AppCompatActivity.RESULT_OK)
-            finish()
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.item_cancel -> {
+                finish()
+            }
         }
+        return super.onOptionsItemSelected(item)
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_hillfort, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }
