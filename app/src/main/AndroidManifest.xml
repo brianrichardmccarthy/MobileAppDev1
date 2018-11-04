@@ -19,7 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.HillfortActivity">
+        <activity android:name=".activities.HillfortActivity"
+            android:parentActivityName=".activities.HillfortListActivity">
         </activity>
         <activity android:name=".activities.HillfortListActivity">
         </activity>
@@ -28,7 +29,8 @@
             android:value="@string/google_maps_key" />
         <activity
             android:name=".activities.MapsActivity"
-            android:label="@string/title_activity_maps">
+            android:label="@string/title_activity_maps"
+            android:parentActivityName=".activities.HillfortActivity">
         </activity>
     </application>
 
