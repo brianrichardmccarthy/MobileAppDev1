@@ -9,11 +9,11 @@ import io.github.brianrichardmccarthy.hillforts.main.MainApp
 
 class SplashActivity : AppCompatActivity() {
     private lateinit var delayHandler: Handler
-    private val SPLASH_DELAY: Long = 3000
+    private val SPLASH_DELAY: Long = 1000
 
     internal val runnable: Runnable = Runnable {
         if (!isFinishing) {
-            val intent = Intent(applicationContext, HillfortListActivity::class.java)
+            val intent = Intent(applicationContext, SignInActivity::class.java)
             startActivity(intent)
             finish()
         }

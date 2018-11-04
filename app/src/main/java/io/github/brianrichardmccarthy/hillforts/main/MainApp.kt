@@ -1,19 +1,20 @@
 package io.github.brianrichardmccarthy.hillforts.main
 
 import android.app.Application
-import io.github.brianrichardmccarthy.hillforts.models.HillfortJsonStore
-import io.github.brianrichardmccarthy.hillforts.models.HillfortMemStore
-import io.github.brianrichardmccarthy.hillforts.models.HillfortModel
+import io.github.brianrichardmccarthy.hillforts.models.JsonStoreData
+import io.github.brianrichardmccarthy.hillforts.models.JsonStoreDataUser
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
 class MainApp : Application(), AnkoLogger {
 
-    lateinit var hillforts: HillfortJsonStore
+    lateinit var hillforts: JsonStoreData
+    lateinit var users: JsonStoreDataUser
 
     override fun onCreate() {
         super.onCreate()
-        hillforts = HillfortJsonStore(applicationContext)
+        hillforts = JsonStoreData(applicationContext)
+        users = JsonStoreDataUser(applicationContext)
         info("Placemark started")
     }
 }

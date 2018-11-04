@@ -9,7 +9,7 @@ internal fun getId(): Long {
     return lastId++
 }
 
-class HillfortMemStore : HillfortStore, AnkoLogger {
+class MemStoreData : StoreData<HillfortModel>, AnkoLogger {
     val hillforts = ArrayList<HillfortModel>()
 
     override fun create(hillfortModel: HillfortModel) {

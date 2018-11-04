@@ -14,4 +14,13 @@
     <string name="button_location">Set Location</string>
     <string name="title_activity_maps">Map</string>
     <string name="loader_text">Hillfort Splash Screen</string>
+    <string name="btn_create_account">Create Account</string>
+    <string name="btn_login">Log in</string>
+    <string name="hint_userpassword">Password</string>
+    <string name="hint_username">Username</string>
+    <string name="create_account">Create Account</string>
+    <string name="error_password">Error Please Enter a Password</string>
+    <string name="error_user">Error Please Enter a Username</string>
+    <string name="error_not_found">Sorry account doesn\'t exist</string>
+    <string name="error_logging_in">Sorry Couldn\\\'t Log you in</string>
 </resources>
