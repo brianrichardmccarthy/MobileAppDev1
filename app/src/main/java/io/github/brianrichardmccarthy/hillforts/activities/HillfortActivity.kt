@@ -12,15 +12,15 @@ import io.github.brianrichardmccarthy.hillforts.helpers.showImagePicker
 import io.github.brianrichardmccarthy.hillforts.main.MainApp
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import io.github.brianrichardmccarthy.hillforts.models.HillfortModel
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-import org.jetbrains.anko.toast
+import io.github.brianrichardmccarthy.hillforts.models.Location
+import org.jetbrains.anko.*
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     var hillfortModel = HillfortModel()
     lateinit var app : MainApp
     val IMAGE_REQUEST = 1
+    val LOCATION_REQUEST = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,8 +46,19 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         }
 
         chooseImage.setOnClickListener {
-            info ("Select image")
             showImagePicker(this, IMAGE_REQUEST)
+        }
+
+        hillfortLocation.setOnClickListener {
+            var location = Location(52.245696, -7.139102, 15f)
+
+            if (hillfortModel.zoom != 0f) {
+                location.lat = hillfortModel.lat
+                location.lng = hillfortModel.lng
+                location.zoom = hillfortModel.zoom
+            }
+
+            startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
         }
 
         btnAdd.setOnClickListener {
@@ -92,7 +103,16 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
                     chooseImage.setText(R.string.change_hillfort_image)
                 }
             }
+            LOCATION_REQUEST -> {
+                if (data != null) {
+                    val location = data.extras.getParcelable<Location>("location")
+                    hillfortModel.lat = location.lat
+                    hillfortModel.lng = location.lng
+                    hillfortModel.zoom = location.zoom
+                }
+            }
         }
+
     }
 
 }
