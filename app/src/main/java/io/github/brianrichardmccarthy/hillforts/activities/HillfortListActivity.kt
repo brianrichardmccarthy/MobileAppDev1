@@ -1,5 +1,6 @@
 package io.github.brianrichardmccarthy.hillforts.activities
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -8,6 +9,7 @@ import android.view.*
 import io.github.brianrichardmccarthy.hillforts.R
 import io.github.brianrichardmccarthy.hillforts.main.MainApp
 import io.github.brianrichardmccarthy.hillforts.models.HillfortModel
+import io.github.brianrichardmccarthy.hillforts.models.UserModel
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
@@ -27,6 +29,7 @@ class HillfortListActivity: AppCompatActivity(), HillfortListener {
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         loadHillforts()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -37,6 +40,11 @@ class HillfortListActivity: AppCompatActivity(), HillfortListener {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.item_add -> startActivityForResult<HillfortActivity>(0)
+            R.id.item_logout -> {
+                app.users.currentUser = UserModel()
+                setResult(Activity.RESULT_OK)
+                finish()
+            }
         }
         return super.onOptionsItemSelected(item)
     }

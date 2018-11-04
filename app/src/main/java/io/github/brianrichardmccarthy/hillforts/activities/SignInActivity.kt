@@ -50,6 +50,10 @@ class SignInActivity : AppCompatActivity(), AnkoLogger {
                 } else {
                     app.users.currentUser = user
                     info("Signed into account $app.users.currentUser")
+                    username.text?.clear()
+                    userpassword.text?.clear()
+                    username.clearFocus()
+                    userpassword.clearFocus()
                     startActivityForResult<HillfortListActivity>(0)
                 }
             }
