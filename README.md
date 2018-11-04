@@ -17,4 +17,26 @@
 | Excellent | Settings with stats) | Date Visited | Naviagtion Drawer | Unified Json |
 |  | | Additional notes | | |
 
-### Implemented
+# Features implemented
+
+## Starter
+
+* Hillfort List
+* Hillfort Edit
+* Hillfort information (Name, Description, Single Image, Location)
+* Toolbar (Cancel, Delete)
+
+## Baseline
+
+* Hillfort create
+* Add
+* Hillfort Json persistance
+* Splash Screen
+* Up
+
+## Good
+
+* Signup
+* Login
+* User Json
+* Logout
